@@ -2,6 +2,7 @@ package com.example.demo
 
 import org.jdbi.v3.core.Jdbi
 import org.jdbi.v3.core.kotlin.KotlinPlugin
+import org.jdbi.v3.sqlobject.SqlObjectPlugin
 import org.jdbi.v3.sqlobject.kotlin.KotlinSqlObjectPlugin
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
@@ -17,6 +18,7 @@ class DbConfiguration {
     @Bean
     fun dbiBean(): Jdbi {
         val jdbi = Jdbi.create(dataSource)
+        jdbi.installPlugin(SqlObjectPlugin())
         jdbi.installPlugin(KotlinPlugin())
         jdbi.installPlugin(KotlinSqlObjectPlugin())
         return jdbi
